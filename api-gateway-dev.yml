@@ -1,0 +1,38 @@
+# D:\All_Coding_Zone\Java\UserService-config\api-gateway-dev.yml
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        # Маршрут для user-service
+        - id: user-service-route
+          uri: lb://user-service
+          predicates:
+            - Path=/api/users/**
+          filters:
+            - StripPrefix=1
+        # Маршрут для notification-service
+        - id: notification-service-route
+          uri: lb://notification-service
+          predicates:
+            - Path=/api/notifications/**
+          filters:
+            - StripPrefix=1
+
+server:
+  port: 8070 # Порт шлюза
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 30
+
+# Actuator (по желанию)
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, gateway
