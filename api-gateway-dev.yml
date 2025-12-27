@@ -18,7 +18,7 @@ spring:
           predicates:
             - Path=/api/notifications/**
           filters:
-            - StripPrefix=1
+            - StripPrefix=0
 
 server:
   port: 8070 # Порт шлюза
