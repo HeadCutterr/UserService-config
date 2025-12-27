@@ -11,7 +11,7 @@ spring:
           predicates:
             - Path=/api/users/**
           filters:
-            - StripPrefix=1
+            - StripPrefix=0
         # Маршрут для notification-service
         - id: notification-service-route
           uri: lb://notification-service
